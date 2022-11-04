@@ -1,15 +1,8 @@
-from typing import NamedTuple, List, Dict, Optional
+from csp import CSP, Constraint
 from random import choice
 from string import ascii_uppercase
-from csp import CSP, Constraint
-
-
-Grid = List[List[str]]  # type alias for grids
-
-
-class GridLocation(NamedTuple):
-    row: int
-    col: int
+from typing import List, Dict, Optional
+from utils import Grid, GridLocation, display_grid
 
 
 class WordSearchConstraint(Constraint[str, List[GridLocation]]):
@@ -71,11 +64,6 @@ def insert_solution_into_grid(
         for i, letter in enumerate(word):
             (row, col) = (grid_locations[i].row, grid_locations[i].col)
             grid[row][col] = letter
-
-
-def display_grid(grid: Grid) -> None:
-    for row in grid:
-        print("".join(row))
 
 
 if __name__ == '__main__':
