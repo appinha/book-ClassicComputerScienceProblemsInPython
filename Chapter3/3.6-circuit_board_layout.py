@@ -1,5 +1,6 @@
 from csp import Constraint, CSP
-from string import ascii_lowercase
+from itertools import cycle
+from termcolor import colored
 from typing import Dict, List, Optional, Tuple
 from utils import Grid, GridLocation, display_grid
 
@@ -59,11 +60,11 @@ def insert_solution_into_grid(
     solution: Optional[Dict[Rectangle, List[GridLocation]]],
     grid: Grid
 ) -> None:
-    i = 17
+    colors = cycle(['blue', 'yellow', 'green', 'magenta', 'cyan', 'red'])
     for rectangle, grid_locations in solution.items():
+        color = next(colors)
         for loc in grid_locations:
-            grid[loc.row][loc.col] = ascii_lowercase[i]
-        i += 1
+            grid[loc.row][loc.col] = colored('■', color)
 
 
 if __name__ == '__main__':

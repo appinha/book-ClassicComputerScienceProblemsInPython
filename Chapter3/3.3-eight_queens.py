@@ -1,4 +1,5 @@
 from csp import Constraint, CSP
+from termcolor import colored
 from typing import Dict, List, Optional, Tuple
 
 
@@ -25,7 +26,7 @@ def display_queens_on_board(solution: Dict[int, int]) -> None:
         line = ''
         for row in range(1, 9):
             if solution[col] == row:
-                line += '★  '
+                line += colored('★  ', 'yellow')
             else:
                 line += '□  '
         print(line)

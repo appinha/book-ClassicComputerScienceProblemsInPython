@@ -1,6 +1,8 @@
 from csp import CSP, Constraint
+from itertools import cycle
 from random import choice
 from string import ascii_uppercase
+from termcolor import colored
 from typing import List, Dict, Optional
 from utils import Grid, GridLocation, display_grid
 
@@ -57,13 +59,15 @@ def insert_solution_into_grid(
     solution: Optional[Dict[str, List[GridLocation]]],
     grid: Grid
 ) -> None:
+    colors = cycle(['blue', 'yellow', 'green', 'magenta', 'cyan', 'red'])
     for word, grid_locations in solution.items():
+        color = next(colors)
         # random reverse half the time
         if choice([True, False]):
             grid_locations.reverse()
         for i, letter in enumerate(word):
             (row, col) = (grid_locations[i].row, grid_locations[i].col)
-            grid[row][col] = letter
+            grid[row][col] = colored(letter, color)
 
 
 if __name__ == '__main__':
