@@ -7,19 +7,33 @@ from typing import List, Dict, Optional
 from utils import Grid, GridLocation, display_grid
 
 
+CAN_OVERLAP = True
+
+
 class WordSearchConstraint(Constraint[str, List[GridLocation]]):
     def __init__(self, words: List[str]) -> None:
         super().__init__(words)
         self.words: List[str] = words
 
     def is_satisfied(self, assignment: Dict[str, List[GridLocation]]) -> bool:
-        # if there are any duplicates grid locations, then there is an overlap
-        all_locations = [
-            locs
-            for values in assignment.values()
-            for locs in values
-        ]
-        return len(set(all_locations)) == len(all_locations)
+        if CAN_OVERLAP:
+            letter_by_location = {}
+            for word, locations in assignment.items():
+                for i, location in enumerate(locations):
+                    if location in letter_by_location:
+                        if word[i] != letter_by_location[location]:
+                            return False
+                    else:
+                        letter_by_location[location] = word[i]
+            return True
+        else:
+            # if there are any duplicates grid locations, then there is an overlap
+            all_locations = [
+                location
+                for locations in assignment.values()
+                for location in locations
+            ]
+            return len(set(all_locations)) == len(all_locations)
 
 
 def generate_grid(rows: int, cols: int) -> Grid:
@@ -63,7 +77,7 @@ def insert_solution_into_grid(
     for word, grid_locations in solution.items():
         color = next(colors)
         # random reverse half the time
-        if choice([True, False]):
+        if not CAN_OVERLAP and choice([True, False]):
             grid_locations.reverse()
         for i, letter in enumerate(word):
             (row, col) = (grid_locations[i].row, grid_locations[i].col)
