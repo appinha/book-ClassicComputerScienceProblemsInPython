@@ -2,7 +2,6 @@
 # known as domain of type D and constraints that determine whether a particular variable's domain
 # selection is valid.
 
-from threading import local
 from typing import Generic, TypeVar, Dict, List, Optional
 from abc import ABC, abstractmethod
 
