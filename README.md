@@ -1,5 +1,5 @@
 <h1 align="center">
-	📘 Classic Computer Science Problems In Python
+	📘 Classic Computer Science Problems In Python 🐍
 </h1>
 
 <p align="center">
@@ -84,3 +84,13 @@
   - [Dijkstra’s algorithm](Chapter4/dijkstra.py)
 - 4.6 Real-world applications
 - 4.7 Exercises
+
+### Chapter 5 - Genetic algorithms
+
+### Chapter 6 - K-means clustering
+
+### Chapter 7 - Fairly simple neural networks
+
+### Chapter 8 - Adversarial search
+
+### Chapter 9 - Miscellaneous problems
